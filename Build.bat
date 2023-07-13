@@ -4,10 +4,8 @@ BuildCookRun ^
 -platform=Win64 ^
 -clientconfig=Development ^
 -build ^
-::-nocompileeditor
-::-target=TPS ^
 -cook ^
-::-skippackage ^
 -pak ^
+-allmaps ^
 -stage -stagingdirectory=C:\JenkinsJobs\TPS\Stage ^
 -archive -archivedirectory=C:\JenkinsJobs\TPS\BuildFromBat ^

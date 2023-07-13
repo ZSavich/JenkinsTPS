@@ -1,6 +1,13 @@
 # Visual Studio 2015 user specific files
 .vs/
 
+# Rider
+.idea/
+
+# RunUAT
+BuildFromBat/
+Stage/
+
 # Compiled Object files
 *.slo
 *.lo
