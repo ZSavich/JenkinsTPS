@@ -1,0 +1,9 @@
+BasedOnStyle: Microsoft
+UseTab: Always
+TabWidth: '4'
+BreakBeforeBraces: Allman
+PointerAlignment: Left
+SpacesBeforeTrailingComments: '2'
+IndentCaseLabels: true
+AllowShortCaseLabelsOnASingleLine: true
+ColumnLimit: '140'
