@@ -49,28 +49,6 @@ ATPSCharacter::ATPSCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);	 // Attach the camera to the end of the boom and let the
 																				 // boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false;								 // Camera does not rotate relative to arm
-
-	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character)
-	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
-
-	/*FString OutStdOut, OutStdErr;
-	int32 OutReturnCode;
-
-	// Get Branch Name
-	if (FPlatformProcess::ExecProcess(TEXT("git"), TEXT("symbolic-ref --short HEAD"), &OutReturnCode, &OutStdOut, &OutStdErr,
-	*FPaths::ConvertRelativePathToFull(FPaths::ProjectDir())))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("EUD::RESULT::%s"), *OutStdOut);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("EUD::ERROR::%s"), *OutStdErr);
-	}*/
-
-	const FString FirstEnvVar = FWindowsPlatformMisc::GetEnvironmentVariable(TEXT("ProjectGitBranch"));
-	const FString SecEnvVar = FWindowsPlatformMisc::GetEnvironmentVariable(TEXT("%ProjectGitBranch%"));
-	const FString ThrEnvVar = FWindowsPlatformMisc::GetEnvironmentVariable(TEXT("$ProjectGitBranch"));
-	UE_LOG(LogTemp, Warning, TEXT("EUD::%s::%s::%s"), *FirstEnvVar, *SecEnvVar, *ThrEnvVar);
 }
 
 void ATPSCharacter::BeginPlay()
