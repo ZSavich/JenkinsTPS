@@ -52,6 +52,10 @@ ATPSCharacter::ATPSCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character)
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	const FString FirstEnvVar = FWindowsPlatformMisc::GetEnvironmentVariable(TEXT("ProjectGitBranch"));
+	const FString SecEnvVar = FWindowsPlatformMisc::GetEnvironmentVariable(TEXT("%ProjectGitBranch%"));
+	UE_LOG(LogTemp, Warning, TEXT("EUD::%s::%s"), *FirstEnvVar, *SecEnvVar);
 }
 
 void ATPSCharacter::BeginPlay()
