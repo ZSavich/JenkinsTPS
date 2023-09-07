@@ -1,8 +1,13 @@
 // TPS Game Copyright
 
-#include "Tests/SandboxTests.h"
+#include "TestUtils.h"
+#if (WITH_DEV_AUTOMATION_TESTS || WITH_PERF_AUTOMATION_TESTS)
+
 #include "CoreMinimal.h"
 #include "Misc/AutomationTest.h"
+#include "Tests/SandboxTests.h"
+
+using namespace TPSGame;
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMathMaxInt, "TPSGame.Math.MaxInt",
 								 EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter |
@@ -32,9 +37,15 @@ bool FMathMaxInt::RunTest(const FString& Parameters)
 bool FMathSqrt::RunTest(const FString& Parameters)
 {
 	AddInfo("Sqrt Function Testing");
-	TestEqual("Sqrt(4)", FMath::Sqrt(4.f), 2.f);
-	TestEqual("Sqrt(3) with Tolerance 0.1f", FMath::Sqrt(3.f), 1.7f, 0.1f);
-	TestEqual("Sqrt(3) with Tolerance 0.01f", FMath::Sqrt(3.f), 1.73f, 0.01f);
-	TestEqual("Sqrt(3) with Tolerance 1.e-5f", FMath::Sqrt(3.f), 1.73205f, 1.e-5f);
+	typedef TArray<TestPayload<float, float>> SqrtTestPayload;
+	SqrtTestPayload TestData{{4.f, 2.f}, {3.f, 1.7f, 0.1f}, {3.f, 1.73f, 0.01f}, {3.f, 1.73205f, 1.e-5f}};
+
+	for (const auto Payload : TestData)
+	{
+		const bool IsEqual = FMath::IsNearlyEqual(FMath::Sqrt(Payload.TestValue), Payload.ExpectedValue, Payload.Tolerance);
+		TestTrueExpr(IsEqual);
+	}
 	return true;
 }
+
+#endif
